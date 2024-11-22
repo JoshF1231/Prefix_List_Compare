@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prefix List Compare", "Prefix List Compare.csproj", "{7A033019-E3FD-47E4-BD70-87A2484C6300}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A033019-E3FD-47E4-BD70-87A2484C6300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A033019-E3FD-47E4-BD70-87A2484C6300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A033019-E3FD-47E4-BD70-87A2484C6300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A033019-E3FD-47E4-BD70-87A2484C6300}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
