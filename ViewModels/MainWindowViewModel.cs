@@ -1,5 +1,6 @@
 ﻿﻿using System;
-using System.Threading;
+ using System.Collections.Generic;
+ using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -14,23 +15,77 @@ public partial class MainWindowViewModel : ViewModelBase
 {
     [ObservableProperty] private string? _text = "";
     [ObservableProperty] private int _caretIndex;
+    [ObservableProperty] private string? _currentConfiguration;
+    [ObservableProperty] private string? _desiredNetworks;
+    [ObservableProperty] private string? _netWorksToReturn;
+    private bool _copyResultsIconState;
+    private bool _currentConfigurationIconState;
+    private bool _desiredNetworksIconState;
 
-    public string Greeting { get; } = "Welcome to Avalonia!";
+
+    public bool CopyResultsIconState
+    {
+        get => _copyResultsIconState;
+        set
+        {
+            if (_copyResultsIconState != value)
+            {
+                _copyResultsIconState = value;
+                OnPropertyChanged();  // Notify the UI that the property value has changed
+            }
+        }
+    }
+    public bool CurrentConfigurationIconState
+    {
+        get => _currentConfigurationIconState;
+        set
+        {
+            if (_currentConfigurationIconState != value)
+            {
+                _currentConfigurationIconState = value;
+                OnPropertyChanged();  // Notify the UI that the property value has changed
+            }
+        }
+    }
+    public bool DesiredNetworksIconState
+    {
+        get => _desiredNetworksIconState;
+        set
+        {
+            if (_desiredNetworksIconState != value)
+            {
+                _desiredNetworksIconState = value;
+                OnPropertyChanged();  // Notify the UI that the property value has changed
+            }
+        }
+    }
+    
+    public bool GetButtonState(string buttonName)
+    {
+        return true;
+    }
+    public MainWindowViewModel()
+    {
+        CopyResultsIconState = false;
+        CurrentConfigurationIconState = false;
+        DesiredNetworksIconState = false;
+    }
+    public string Greeting { get; } = "Prefix List Compare";
     
     [RelayCommand]
-    private async Task CopyText(CancellationToken token)
+    private async Task CopyText()
     {
         try
         {
-            await DoSetClipboardTextAsync(Text);
+            await DoSetClipboardTextAsync(NetWorksToReturn);
         }
         catch (Exception e)
         {
-            await MessageBoxManager.GetMessageBoxStandard("SHeit", "sheit", ButtonEnum.Ok).ShowAsync();
+            await MessageBoxManager.GetMessageBoxStandard("Could not paste to clipboard", "Could not paste to clipboard. Try restarting the program or your computer.", ButtonEnum.Ok).ShowAsync();
         }
     }
     [RelayCommand]
-    public async Task PasteText()
+    private async Task PasteText()
     {
         try
         {
@@ -43,11 +98,28 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         catch (Exception e)
         {
-            await MessageBoxManager.GetMessageBoxStandard("nooo", "nooo", ButtonEnum.Ok).ShowAsync();
-
+            await MessageBoxManager.GetMessageBoxStandard("Could not copy from Clipboard!", "Make sure you have the text copied! (Ctrl+C)", ButtonEnum.Ok).ShowAsync();
         }
     }
+
+    public async Task PasteCurrentConfiguration()
+    {
+        await PasteText();
+        CurrentConfiguration = Text;
+    }
+    public async Task PasteDesiredNetworks()
+    {
+        await PasteText();
+        DesiredNetworks = Text;
+    }
     
+    public async Task CopyResults()
+    {
+        NetWorksToReturn = "123";
+        CopyResultsIconState = false;
+        await Task.WhenAll(Task.Delay(150),CopyText());
+        CopyResultsIconState = true;
+    }
     private async Task DoSetClipboardTextAsync(string? text)
     {
         // For learning purposes, we opted to directly get the reference
@@ -78,4 +150,11 @@ public partial class MainWindowViewModel : ViewModelBase
 
         return await provider.GetTextAsync();
     }
+
+
+    
+    
+    
 }
+
+

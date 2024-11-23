@@ -1,32 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joshf\\RiderProjects\\Prefix List Compare\\Prefix List Compare.csproj": {}
+    "C:\\Users\\Josh\\RiderProjects\\Prefix_List_Compare\\Prefix List Compare.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joshf\\RiderProjects\\Prefix List Compare\\Prefix List Compare.csproj": {
+    "C:\\Users\\Josh\\RiderProjects\\Prefix_List_Compare\\Prefix List Compare.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joshf\\RiderProjects\\Prefix List Compare\\Prefix List Compare.csproj",
+        "projectUniqueName": "C:\\Users\\Josh\\RiderProjects\\Prefix_List_Compare\\Prefix List Compare.csproj",
         "projectName": "Prefix List Compare",
-        "projectPath": "C:\\Users\\joshf\\RiderProjects\\Prefix List Compare\\Prefix List Compare.csproj",
-        "packagesPath": "C:\\Users\\joshf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joshf\\RiderProjects\\Prefix List Compare\\obj\\",
+        "projectPath": "C:\\Users\\Josh\\RiderProjects\\Prefix_List_Compare\\Prefix List Compare.csproj",
+        "packagesPath": "C:\\Users\\Josh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Josh\\RiderProjects\\Prefix_List_Compare\\obj\\",
         "projectStyle": "PackageReference",
         "UsingMicrosoftNETSdk": false,
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\joshf\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Josh\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,7 +37,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -74,6 +68,10 @@
               "target": "Package",
               "version": "[8.2.1, )"
             },
+            "LoadingIndicators.Avalonia": {
+              "target": "Package",
+              "version": "[11.0.11.1, )"
+            },
             "MessageBox.Avalonia": {
               "target": "Package",
               "version": "[3.2.0, )"
@@ -95,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
