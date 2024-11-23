@@ -467,6 +467,18 @@
           }
         }
       },
+      "LoadingIndicators.Avalonia/11.0.11.1": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "11.0.11"
+        },
+        "compile": {
+          "lib/net8.0/LoadingIndicators.Avalonia.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/LoadingIndicators.Avalonia.dll": {}
+        }
+      },
       "MessageBox.Avalonia/3.2.0": {
         "type": "package",
         "dependencies": {
@@ -1275,6 +1287,23 @@
         "runtimes/win-x86/native/libHarfBuzzSharp.dll"
       ]
     },
+    "LoadingIndicators.Avalonia/11.0.11.1": {
+      "sha512": "A4hPrrOMRtgcGRqnc1sscaWudF99C+YKhRBaYnf1wVxfOVOwTVEM4I7qdUU4gyAL2oiBzXw/zuC4dD1XrdR9PA==",
+      "type": "package",
+      "path": "loadingindicators.avalonia/11.0.11.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "icon.png",
+        "lib/net6.0/LoadingIndicators.Avalonia.dll",
+        "lib/net7.0/LoadingIndicators.Avalonia.dll",
+        "lib/net8.0/LoadingIndicators.Avalonia.dll",
+        "loadingindicators.avalonia.11.0.11.1.nupkg.sha512",
+        "loadingindicators.avalonia.nuspec"
+      ]
+    },
     "MessageBox.Avalonia/3.2.0": {
       "sha512": "f4iJxmyF0fKoJQdMCiSSRitP/niUl4g1mSBLGQ9+/58ZXrhjUImnuLdbuBY36n+JpMegy4FA62s588yJkbbjCA==",
       "type": "package",
@@ -1528,36 +1557,30 @@
       "Avalonia.Fonts.Inter >= 11.2.1",
       "Avalonia.Themes.Fluent >= 11.2.1",
       "CommunityToolkit.Mvvm >= 8.2.1",
+      "LoadingIndicators.Avalonia >= 11.0.11.1",
       "MessageBox.Avalonia >= 3.2.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\joshf\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Josh\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\joshf\\RiderProjects\\Prefix List Compare\\Prefix List Compare.csproj",
+      "projectUniqueName": "C:\\Users\\Josh\\RiderProjects\\Prefix_List_Compare\\Prefix List Compare.csproj",
       "projectName": "Prefix List Compare",
-      "projectPath": "C:\\Users\\joshf\\RiderProjects\\Prefix List Compare\\Prefix List Compare.csproj",
-      "packagesPath": "C:\\Users\\joshf\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\joshf\\RiderProjects\\Prefix List Compare\\obj\\",
+      "projectPath": "C:\\Users\\Josh\\RiderProjects\\Prefix_List_Compare\\Prefix List Compare.csproj",
+      "packagesPath": "C:\\Users\\Josh\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Josh\\RiderProjects\\Prefix_List_Compare\\obj\\",
       "projectStyle": "PackageReference",
       "UsingMicrosoftNETSdk": false,
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\joshf\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Josh\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1574,7 +1597,7 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -1605,6 +1628,10 @@
             "target": "Package",
             "version": "[8.2.1, )"
           },
+          "LoadingIndicators.Avalonia": {
+            "target": "Package",
+            "version": "[11.0.11.1, )"
+          },
           "MessageBox.Avalonia": {
             "target": "Package",
             "version": "[3.2.0, )"
@@ -1626,7 +1653,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
