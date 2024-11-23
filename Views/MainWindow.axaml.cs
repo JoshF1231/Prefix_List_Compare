@@ -16,7 +16,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        this.DataContext = new MainWindowViewModel();
+        this.DataContext = new MainWindowViewModel(this);
     }
 
     private void PasteButton(object? sender, RoutedEventArgs e)

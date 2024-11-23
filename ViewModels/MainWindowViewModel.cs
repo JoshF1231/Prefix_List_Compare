@@ -1,74 +1,85 @@
 ﻿﻿using System;
  using System.Collections.Generic;
+ using System.Collections.ObjectModel;
  using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Collections;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Input.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
-
+using Tmds.DBus.Protocol;
+using Prefix_List_Compare.Models;
 namespace Prefix_List_Compare.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
+    private Window _thisWindow;
     [ObservableProperty] private string? _text = "";
     [ObservableProperty] private int _caretIndex;
     [ObservableProperty] private string? _currentConfiguration;
     [ObservableProperty] private string? _desiredNetworks;
     [ObservableProperty] private string? _netWorksToReturn;
+    [ObservableProperty] private bool? _resultsButtonState;
+    private List<String> _buttonNames = new();
+    private readonly CalculationModel _calculationModel = new(); 
+    private AvaloniaDictionary<string,bool> _iconStates = new();
+    public AvaloniaDictionary<string, bool> IconStates
+    {
+        get => _iconStates;
+        set
+        {
+            _iconStates = value;
+            OnPropertyChanged(nameof(IconStates));
+        }
+    }
 
-    private bool _currentConfigurationIconState;
-    private bool _desiredNetworksIconState;
-    private bool _copyResultsIconState;
+    public MainWindowViewModel(Window? window = null)
+    {
+        if (window != null)
+        {
+            _thisWindow = window;
+        }
+        _resultsButtonState = false;
+        InitializeButtonNames();
+        foreach (var buttonName in _buttonNames)
+        {
+            IconStates.Add(buttonName, false); // represents icon states ( the loading and checkmark icons)
+        }
+    }
 
-    public bool CurrentConfigurationIconState
+    private void InitializeButtonNames()
     {
-        get => _currentConfigurationIconState;
-        set
+        _buttonNames.Add("PasteCurrentConfigurationLoading");
+        _buttonNames.Add("PasteCurrentConfigurationCheckmark");
+        _buttonNames.Add("PasteDesiredNetworksLoading");
+        _buttonNames.Add("PasteDesiredNetworksCheckmark");
+        _buttonNames.Add("CopyResultsLoading");
+        _buttonNames.Add("CopyResultsCheckmark");
+    }
+
+    private async void CheckIfResultsAreCalculatable()
+    {
+        if (CurrentConfiguration != null && DesiredNetworks != null)
         {
-            if (_currentConfigurationIconState != value)
-            {
-                _currentConfigurationIconState = value;
-                OnPropertyChanged();  // Notify the UI that the property value has changed
-            }
+            //await CalculateResults();
+            ResultsButtonState = true;
+        }
+        else ResultsButtonState = false;
+    }
+
+    private async Task CalculateResults()
+    {
+        if (CurrentConfiguration != null && DesiredNetworks != null)
+        {
+            NetWorksToReturn = await _calculationModel.CalculateNetworkDifferences(CurrentConfiguration, DesiredNetworks);
         }
     }
-    public bool DesiredNetworksIconState
-    {
-        get => _desiredNetworksIconState;
-        set
-        {
-            if (_desiredNetworksIconState != value)
-            {
-                _desiredNetworksIconState = value;
-                OnPropertyChanged();  // Notify the UI that the property value has changed
-            }
-        }
-    }
-    public bool CopyResultsIconState
-    {
-        get => _copyResultsIconState;
-        set
-        {
-            if (_copyResultsIconState != value)
-            {
-                _copyResultsIconState = value;
-                OnPropertyChanged();  // Notify the UI that the property value has changed
-            }
-        }
-    }
-    public bool GetButtonState(string buttonName)
-    {
-        return true;
-    }
-    public MainWindowViewModel()
-    {
-        CopyResultsIconState = false;
-        CurrentConfigurationIconState = false;
-        DesiredNetworksIconState = false;
-    }
+    
     public string Greeting { get; } = "Prefix List Compare";
     
     [RelayCommand]
@@ -92,8 +103,6 @@ public partial class MainWindowViewModel : ViewModelBase
                 Text = string.Empty;
                 Text = Text?.Insert(CaretIndex, pastedText);
             }
-            if (Text != null)
-                await MessageBoxManager.GetMessageBoxStandard("nooo", Text, ButtonEnum.Ok).ShowAsync();
         }
         catch (Exception e)
         {
@@ -101,23 +110,71 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+
+    public async Task Clipboardtime()
+    {
+        var clipboardText = "";
+        try
+        {
+            if (_thisWindow != null && _thisWindow.Clipboard != null){
+            clipboardText = await _thisWindow.Clipboard.GetTextAsync();
+            Text=string.Empty;
+            Text=Text?.Insert(0, clipboardText);
+            }
+        }
+        catch
+        {
+            return;
+        }
+        return;
+    }
     public async Task PasteCurrentConfiguration()
     {
-        await PasteText();
-        CurrentConfiguration = Text;
+        TransitionToLoading("PasteCurrentConfiguration");
+        await Task.WhenAny(Task.Delay(150), Clipboardtime());
+        CurrentConfiguration = string.Empty;
+        if (!string.IsNullOrEmpty(Text)){
+            CurrentConfiguration = CurrentConfiguration?.Insert(0,Text);
+            TransitionToCheckmark("PasteCurrentConfiguration");
+            CheckIfResultsAreCalculatable();
+        }
     }
     public async Task PasteDesiredNetworks()
     {
-        await PasteText();
-        DesiredNetworks = Text;
+        TransitionToLoading("PasteDesiredNetworks");
+        await Task.WhenAny(Task.Delay(150), Clipboardtime());
+        DesiredNetworks = string.Empty;
+        if (!string.IsNullOrEmpty(Text)){
+            DesiredNetworks = Text?.Insert(0,Text);
+            TransitionToCheckmark("PasteDesiredNetworks");
+            CheckIfResultsAreCalculatable();
+        }
     }
     
     public async Task CopyResults()
     {
-        NetWorksToReturn = "123";
-        CopyResultsIconState = false;
+        TransitionToLoading("CopyResults");
+        if (NetWorksToReturn == null)
+        {
+            MessageBoxManager.GetMessageBoxStandard("No differences found!","No differences found. please make sure you've copied and pasted correctly.",ButtonEnum.Ok).ShowAsync();
+            return;
+        }
         await Task.WhenAll(Task.Delay(150),CopyText());
-        CopyResultsIconState = true;
+        TransitionToCheckmark("CopyResults");
+    }
+
+    private void TransitionToLoading(string buttonName)
+    {
+        IconStates[$"{buttonName}Checkmark"] = false;
+        IconStates[$"{buttonName}Loading"] = true;
+        OnPropertyChanged(nameof(IconStates));
+    }
+
+    private void TransitionToCheckmark(string buttonName)
+    {
+        IconStates[$"{buttonName}Loading"] = false;
+        IconStates[$"{buttonName}Checkmark"] = true;
+        OnPropertyChanged(nameof(IconStates));
     }
     private async Task DoSetClipboardTextAsync(string? text)
     {

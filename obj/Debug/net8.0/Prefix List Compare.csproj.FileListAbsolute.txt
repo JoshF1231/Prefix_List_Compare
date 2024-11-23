@@ -140,3 +140,75 @@ C:\Users\Josh\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Prefix L.EF17BC
 C:\Users\Josh\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Prefix List Compare.genruntimeconfig.cache
 C:\Users\Josh\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\ref\Prefix List Compare.dll
 C:\Users\Josh\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\LoadingIndicators.Avalonia.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Prefix List Compare.exe
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Prefix List Compare.deps.json
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Prefix List Compare.runtimeconfig.json
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Prefix List Compare.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Prefix List Compare.pdb
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Base.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Controls.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.DesignerSupport.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Dialogs.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Markup.Xaml.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Markup.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Metal.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.MicroCom.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.OpenGL.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Vulkan.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Controls.ColorPicker.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Controls.DataGrid.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Desktop.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Diagnostics.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Fonts.Inter.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.FreeDesktop.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Native.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Remote.Protocol.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Skia.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Themes.Fluent.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Themes.Simple.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.Win32.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Avalonia.X11.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\CommunityToolkit.Mvvm.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\DialogHost.Avalonia.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\HarfBuzzSharp.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\LoadingIndicators.Avalonia.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\MsBox.Avalonia.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\MicroCom.Runtime.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\SkiaSharp.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\Tmds.DBus.Protocol.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\win-arm64\native\av_libglesv2.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\win-x64\native\av_libglesv2.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\win-x86\native\av_libglesv2.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\osx\native\libAvaloniaNative.dylib
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\linux-arm\native\libHarfBuzzSharp.so
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\linux-arm64\native\libHarfBuzzSharp.so
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libHarfBuzzSharp.so
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\linux-x64\native\libHarfBuzzSharp.so
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\osx\native\libHarfBuzzSharp.dylib
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\linux-arm\native\libSkiaSharp.so
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\linux-arm64\native\libSkiaSharp.so
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libSkiaSharp.so
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\linux-x64\native\libSkiaSharp.so
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\osx\native\libSkiaSharp.dylib
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\win-arm64\native\libSkiaSharp.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\win-x64\native\libSkiaSharp.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\bin\Debug\net8.0\runtimes\win-x86\native\libSkiaSharp.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Prefix List Compare.csproj.AssemblyReference.cache
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Avalonia\Resources.Inputs.cache
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Avalonia\resources
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Prefix List Compare.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Prefix List Compare.AssemblyInfoInputs.cache
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Prefix List Compare.AssemblyInfo.cs
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Prefix List Compare.csproj.CoreCompileInputs.cache
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Prefix List Compare.sourcelink.json
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Avalonia\Prefix List Compare.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Avalonia\Prefix List Compare.pdb
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\refint\Avalonia\Prefix List Compare.dll
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Prefix L.EF17BC5D.Up2Date
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\Prefix List Compare.genruntimeconfig.cache
+C:\Users\joshf\RiderProjects\Prefix_List_Compare\obj\Debug\net8.0\ref\Prefix List Compare.dll

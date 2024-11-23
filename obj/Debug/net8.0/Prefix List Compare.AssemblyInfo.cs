@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Prefix List Compare")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4eaa92daecac5582748ff7007af7b2f0e950fd8a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+26aac25dd7ed974a48248dbbc5b52334a8b4ae9b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Prefix List Compare")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Prefix List Compare")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
