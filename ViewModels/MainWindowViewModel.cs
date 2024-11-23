@@ -18,23 +18,11 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] private string? _currentConfiguration;
     [ObservableProperty] private string? _desiredNetworks;
     [ObservableProperty] private string? _netWorksToReturn;
-    private bool _copyResultsIconState;
+
     private bool _currentConfigurationIconState;
     private bool _desiredNetworksIconState;
+    private bool _copyResultsIconState;
 
-
-    public bool CopyResultsIconState
-    {
-        get => _copyResultsIconState;
-        set
-        {
-            if (_copyResultsIconState != value)
-            {
-                _copyResultsIconState = value;
-                OnPropertyChanged();  // Notify the UI that the property value has changed
-            }
-        }
-    }
     public bool CurrentConfigurationIconState
     {
         get => _currentConfigurationIconState;
@@ -59,7 +47,18 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         }
     }
-    
+    public bool CopyResultsIconState
+    {
+        get => _copyResultsIconState;
+        set
+        {
+            if (_copyResultsIconState != value)
+            {
+                _copyResultsIconState = value;
+                OnPropertyChanged();  // Notify the UI that the property value has changed
+            }
+        }
+    }
     public bool GetButtonState(string buttonName)
     {
         return true;
