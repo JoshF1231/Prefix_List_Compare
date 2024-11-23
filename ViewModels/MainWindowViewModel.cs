@@ -1,13 +1,16 @@
 ﻿﻿using System;
  using System.Collections.Generic;
+ using System.Collections.ObjectModel;
  using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Collections;
 using Avalonia.Controls.ApplicationLifetimes;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
+using Tmds.DBus.Protocol;
 
 namespace Prefix_List_Compare.ViewModels;
 
@@ -18,11 +21,47 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] private string? _currentConfiguration;
     [ObservableProperty] private string? _desiredNetworks;
     [ObservableProperty] private string? _netWorksToReturn;
+    private List<String> _buttonNames = new();
+    
+    private AvaloniaDictionary<string,bool> _iconStates = new();
+
+    public AvaloniaDictionary<string, bool> IconStates
+    {
+        get => _iconStates;
+        set
+        {
+            _iconStates = value;
+            OnPropertyChanged(nameof(IconStates));
+        }
+    }
 
     private bool _currentConfigurationIconState;
     private bool _desiredNetworksIconState;
     private bool _copyResultsIconState;
 
+    public MainWindowViewModel()
+    {
+        CopyResultsIconState = false;
+        CurrentConfigurationIconState = false;
+        DesiredNetworksIconState = false;
+        InitializeButtonNames();
+        foreach (var buttonName in _buttonNames)
+        {
+            IconStates.Add(buttonName, false); // represents icon states ( the loading and checkmark icons)
+        }
+    }
+
+    private void InitializeButtonNames()
+    {
+        _buttonNames.Add("PasteCurrentConfigurationLoading");
+        _buttonNames.Add("PasteCurrentConfigurationCheckmark");
+        _buttonNames.Add("PasteDesiredNetworksLoading");
+        _buttonNames.Add("PasteDesiredNetworksCheckmark");
+        _buttonNames.Add("CopyResultsLoading");
+        _buttonNames.Add("CopyResultsCheckmark");
+    }
+    
+    
     public bool CurrentConfigurationIconState
     {
         get => _currentConfigurationIconState;
@@ -63,12 +102,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         return true;
     }
-    public MainWindowViewModel()
-    {
-        CopyResultsIconState = false;
-        CurrentConfigurationIconState = false;
-        DesiredNetworksIconState = false;
-    }
+
     public string Greeting { get; } = "Prefix List Compare";
     
     [RelayCommand]
@@ -108,8 +142,14 @@ public partial class MainWindowViewModel : ViewModelBase
     }
     public async Task PasteDesiredNetworks()
     {
-        await PasteText();
+        IconStates["PasteDesiredNetworksCheckmark"] = false;
+        IconStates["PasteDesiredNetworksLoading"] = true;
+        OnPropertyChanged(nameof(IconStates));
+        await Task.WhenAny(Task.Delay(150), PasteText());
         DesiredNetworks = Text;
+        IconStates["PasteDesiredNetworksLoading"] = false;
+        IconStates["PasteDesiredNetworksCheckmark"] = true;
+        OnPropertyChanged(nameof(IconStates));
     }
     
     public async Task CopyResults()
