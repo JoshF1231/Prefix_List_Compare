@@ -14,11 +14,14 @@ using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using Tmds.DBus.Protocol;
 using Prefix_List_Compare.Models;
+using Prefix_List_Compare.Views;
+
 namespace Prefix_List_Compare.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    private Window _thisWindow;
+    private readonly Window? _thisWindow;
+    [ObservableProperty] private bool _nothingToCalculateLabel = false;
     [ObservableProperty] private string? _text = "";
     [ObservableProperty] private int _caretIndex;
     [ObservableProperty] private string? _currentConfiguration;
@@ -40,10 +43,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel(Window? window = null)
     {
-        if (window != null)
-        {
-            _thisWindow = window;
-        }
+        _thisWindow = window;
         _resultsButtonState = false;
         InitializeButtonNames();
         foreach (var buttonName in _buttonNames)
@@ -62,12 +62,12 @@ public partial class MainWindowViewModel : ViewModelBase
         _buttonNames.Add("CopyResultsCheckmark");
     }
 
-    private async void CheckIfResultsAreCalculatable()
+    private async Task CheckIfResultsAreCalculatable()
     {
         if (CurrentConfiguration != null && DesiredNetworks != null)
         {
-            //await CalculateResults();
-            ResultsButtonState = true;
+            await CalculateResults();
+            ResultsButtonState = !string.IsNullOrEmpty(NetWorksToReturn);
         }
         else ResultsButtonState = false;
     }
@@ -76,91 +76,102 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (CurrentConfiguration != null && DesiredNetworks != null)
         {
+            NothingToCalculateLabel = false;
+            NetWorksToReturn = string.Empty;
             NetWorksToReturn = await _calculationModel.CalculateNetworkDifferences(CurrentConfiguration, DesiredNetworks);
-        }
-    }
-    
-    public string Greeting { get; } = "Prefix List Compare";
-    
-    [RelayCommand]
-    private async Task CopyText()
-    {
-        try
-        {
-            await DoSetClipboardTextAsync(NetWorksToReturn);
-        }
-        catch (Exception e)
-        {
-            await MessageBoxManager.GetMessageBoxStandard("Could not paste to clipboard", "Could not paste to clipboard. Try restarting the program or your computer.", ButtonEnum.Ok).ShowAsync();
-        }
-    }
-    [RelayCommand]
-    private async Task PasteText()
-    {
-        try
-        {
-            if (await DoGetClipboardTextAsync() is { } pastedText){
-                Text = string.Empty;
-                Text = Text?.Insert(CaretIndex, pastedText);
+            if (NetWorksToReturn==string.Empty){
+                NothingToCalculateLabel = true;
             }
         }
-        catch (Exception e)
-        {
-            await MessageBoxManager.GetMessageBoxStandard("Could not copy from Clipboard!", "Make sure you have the text copied! (Ctrl+C)", ButtonEnum.Ok).ShowAsync();
-        }
     }
 
-
-    public async Task Clipboardtime()
+    public string Greeting { get; } = "Prefix List Compare";
+    private async Task CopyTextFromClipboard()
     {
-        var clipboardText = "";
         try
         {
             if (_thisWindow != null && _thisWindow.Clipboard != null){
-            clipboardText = await _thisWindow.Clipboard.GetTextAsync();
-            Text=string.Empty;
-            Text=Text?.Insert(0, clipboardText);
+                var clipboardText = "";
+                clipboardText = await Task.Run(()=>_thisWindow.Clipboard.GetTextAsync().Result);
+                if (clipboardText != null){
+                    Text=string.Empty;
+                    Text=Text?.Insert(0, clipboardText);
+                }
+            }
+            else
+            {
+                await MessageBoxManager.GetMessageBoxStandard("Internal Error","Internal Error. Please restart the application and/or your computer.",ButtonEnum.Ok).ShowAsync();
+
             }
         }
-        catch
+        catch (Exception e)
         {
-            return;
+            await MessageBoxManager.GetMessageBoxStandard("Exception Found", e.Message, ButtonEnum.Ok).ShowAsync();
+
         }
-        return;
     }
+
+    private async Task CopyTextToClipboard(string text)
+    {
+        try
+        {
+            if (_thisWindow != null && _thisWindow.Clipboard != null)
+            {
+                await _thisWindow.Clipboard.ClearAsync();
+                await _thisWindow.Clipboard.SetTextAsync(text);
+            }
+            else
+            {
+                await MessageBoxManager.GetMessageBoxStandard("No access to Clipboard","No access to Clipboard.",ButtonEnum.Ok).ShowAsync();
+
+            }
+        }
+        catch (Exception e)
+        {
+            await MessageBoxManager.GetMessageBoxStandard("Exception Found", e.Message, ButtonEnum.Ok).ShowAsync();
+
+        }
+    }
+    
+    
     public async Task PasteCurrentConfiguration()
     {
         TransitionToLoading("PasteCurrentConfiguration");
-        await Task.WhenAny(Task.Delay(150), Clipboardtime());
+        await Task.WhenAll(Task.Delay(150),CopyTextFromClipboard());
         CurrentConfiguration = string.Empty;
-        if (!string.IsNullOrEmpty(Text)){
-            CurrentConfiguration = CurrentConfiguration?.Insert(0,Text);
-            TransitionToCheckmark("PasteCurrentConfiguration");
-            CheckIfResultsAreCalculatable();
-        }
+         if (!string.IsNullOrEmpty(Text)){
+             CurrentConfiguration = CurrentConfiguration?.Insert(0,Text);
+             await CheckIfResultsAreCalculatable();
+         }
+         TransitionToCheckmark("PasteCurrentConfiguration");
+         await Task.Yield();
     }
+    
+
     public async Task PasteDesiredNetworks()
     {
         TransitionToLoading("PasteDesiredNetworks");
-        await Task.WhenAny(Task.Delay(150), Clipboardtime());
+        await Task.WhenAll(Task.Delay(150), CopyTextFromClipboard());
         DesiredNetworks = string.Empty;
         if (!string.IsNullOrEmpty(Text)){
-            DesiredNetworks = Text?.Insert(0,Text);
-            TransitionToCheckmark("PasteDesiredNetworks");
-            CheckIfResultsAreCalculatable();
+             DesiredNetworks = Text?.Insert(0,Text);
+             await CheckIfResultsAreCalculatable();
         }
+        TransitionToCheckmark("PasteDesiredNetworks");
+        await Task.Yield();
     }
     
     public async Task CopyResults()
     {
         TransitionToLoading("CopyResults");
-        if (NetWorksToReturn == null)
-        {
-            MessageBoxManager.GetMessageBoxStandard("No differences found!","No differences found. please make sure you've copied and pasted correctly.",ButtonEnum.Ok).ShowAsync();
-            return;
-        }
-        await Task.WhenAll(Task.Delay(150),CopyText());
-        TransitionToCheckmark("CopyResults");
+         if (NetWorksToReturn == null)
+         {
+             MessageBoxManager.GetMessageBoxStandard("No differences found!","No differences found. please make sure you've copied and pasted correctly.",ButtonEnum.Ok).ShowAsync();
+             return;
+         }
+         await Task.WhenAll(Task.Delay(150),CopyTextToClipboard(NetWorksToReturn));
+         TransitionToCheckmark("CopyResults");
+         await Task.Yield();
     }
 
     private void TransitionToLoading(string buttonName)
@@ -176,41 +187,6 @@ public partial class MainWindowViewModel : ViewModelBase
         IconStates[$"{buttonName}Checkmark"] = true;
         OnPropertyChanged(nameof(IconStates));
     }
-    private async Task DoSetClipboardTextAsync(string? text)
-    {
-        // For learning purposes, we opted to directly get the reference
-        // for StorageProvider APIs here inside the ViewModel. 
-
-        // For your real-world apps, you should follow the MVVM principles
-        // by making service classes and locating them with DI/IoC.
-
-        // See DepInject project for a sample of how to accomplish this.
-        if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
-            desktop.MainWindow?.Clipboard is not { } provider)
-            throw new NullReferenceException("Missing Clipboard instance.");
-
-        await provider.SetTextAsync(text);
-    }
-    private async Task<string?> DoGetClipboardTextAsync()
-    {
-        // For learning purposes, we opted to directly get the reference
-        // for StorageProvider APIs here inside the ViewModel. 
-
-        // For your real-world apps, you should follow the MVVM principles
-        // by making service classes and locating them with DI/IoC.
-
-        // See DepInject project for a sample of how to accomplish this.
-        if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop ||
-            desktop.MainWindow?.Clipboard is not { } provider)
-            throw new NullReferenceException("Missing Clipboard instance.");
-
-        return await provider.GetTextAsync();
-    }
-
-
-    
-    
-    
 }
 
 
