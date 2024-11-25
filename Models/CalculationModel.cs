@@ -23,12 +23,12 @@ namespace Prefix_List_Compare.Models
                 _networksCurrentConfiguration.Clear();
                 foreach (Match network in regex.Matches(currentConfiguration))
                 {
-                    _networksCurrentConfiguration.Add(network.Value.Replace(" ", ""));
+                    _networksCurrentConfiguration.Add(network.Value.Replace(" ", "").Replace(",","."));
                 }
                 _networksDesiredConfiguration.Clear();
                 foreach (Match network in regex.Matches(desiredNetworks))
                 {
-                    _networksDesiredConfiguration.Add(network.Value.Replace(" ", ""));
+                    _networksDesiredConfiguration.Add(network.Value.Replace(" ", "").Replace(",","."));
                 }
                 _resultBuilder.Clear();
                 foreach (string network in _networksDesiredConfiguration)
