@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using CommunityToolkit.Mvvm.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using MsBox.Avalonia;
+using System.Net;
+using System.Numerics;
+using System;
 
 namespace Prefix_List_Compare.Models
 {
@@ -41,6 +40,18 @@ namespace Prefix_List_Compare.Models
                 var result= _resultBuilder.ToString();
                 return result;
             });
+        }
+
+        static (BigInteger, BigInteger) GetIPRange(IPAddress baseAddress, IPAddress prefixLength)
+        {
+            return (1, 1);
+        }
+
+        static BigInteger IPToBigInteger(IPAddress address)
+        {
+            byte[] bytes = address.GetAddressBytes();
+            Array.Reverse(bytes);
+            return new BigInteger(bytes);
         }
     }
 }

@@ -1,20 +1,12 @@
 ﻿﻿using System;
  using System.Collections.Generic;
- using System.Collections.ObjectModel;
- using System.Threading;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Input.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
-using Tmds.DBus.Protocol;
 using Prefix_List_Compare.Models;
-using Prefix_List_Compare.Views;
 
 namespace Prefix_List_Compare.ViewModels;
 
@@ -101,7 +93,6 @@ public partial class MainWindowViewModel : ViewModelBase
             else
             {
                 await MessageBoxManager.GetMessageBoxStandard("Internal Error","Internal Error. Please restart the application and/or your computer.",ButtonEnum.Ok).ShowAsync();
-
             }
         }
         catch (Exception e)
@@ -166,7 +157,7 @@ public partial class MainWindowViewModel : ViewModelBase
         TransitionToLoading("CopyResults");
          if (NetWorksToReturn == null)
          {
-             MessageBoxManager.GetMessageBoxStandard("No differences found!","No differences found. please make sure you've copied and pasted correctly.",ButtonEnum.Ok).ShowAsync();
+             await MessageBoxManager.GetMessageBoxStandard("No differences found!","No differences found. please make sure you've copied and pasted correctly.",ButtonEnum.Ok).ShowAsync();
              return;
          }
          await Task.WhenAll(Task.Delay(150),CopyTextToClipboard(NetWorksToReturn));

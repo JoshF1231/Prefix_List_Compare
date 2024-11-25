@@ -2178,7 +2178,6 @@
       "packagesPath": "C:\\Users\\joshf\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\joshf\\RiderProjects\\Prefix_List_Compare\\obj\\",
       "projectStyle": "PackageReference",
-      "UsingMicrosoftNETSdk": false,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
@@ -2209,7 +2208,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "all"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
